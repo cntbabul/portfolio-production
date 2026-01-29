@@ -4,12 +4,14 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface Project {
     title: string;
     description: string;
     link: string;
     type: string;
+    imageUrl?: string;
 }
 
 export function Projects({ projects }: { projects: Project[] }) {
@@ -49,7 +51,33 @@ export function Projects({ projects }: { projects: Project[] }) {
             <div
                 className="w-full aspect-video chalk-border-straight bg-black/40 overflow-hidden relative shadow-none hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-shadow duration-300"
             >
-                {project.link && project.link !== "#" ? (
+                {project.imageUrl && project.imageUrl !== "#" ? (
+                    <div className="w-full h-full relative">
+                        {/* Blurred Background for Fill */}
+                        <Image
+                            src={project.imageUrl}
+                            alt={project.title}
+                            fill
+                            className="object-cover blur-sm scale-110 opacity-50"
+                        />
+                        {/* Actual Image */}
+                        <Image
+                            src={project.imageUrl}
+                            alt={project.title}
+                            fill
+                            className="object-contain z-10 transition-transform duration-300 group-hover:scale-105"
+                        />
+                        {project.link && project.link !== "#" && (
+                            <a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="absolute inset-0 z-20 bg-transparent block"
+                                aria-label={`Visit ${project.title}`}
+                            />
+                        )}
+                    </div>
+                ) : project.link && project.link !== "#" ? (
                     <div className="w-full h-full relative">
                         <iframe
                             src={project.link}
@@ -92,7 +120,7 @@ export function Projects({ projects }: { projects: Project[] }) {
     );
 
     return (
-        <section className="w-full overflow-hidden py-12">
+        <section className="w-full max-w-5xl mx-auto p-4 md:p-8 py-12">
             <motion.h2
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}

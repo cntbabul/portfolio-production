@@ -19,9 +19,14 @@ export function Navbar() {
             const sections = navItems.map((item) => document.getElementById(item.id));
             const scrollPosition = window.scrollY + 150; // Offset for better triggering
 
+            // Check if we are at the bottom of the page
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 20) {
+                setActiveSection(navItems[navItems.length - 1].id);
+                return;
+            }
+
             for (const section of sections) {
                 if (!section) continue;
-                const rect = section.getBoundingClientRect();
                 // Check if top of section is near viewport top or within viewport
                 if (section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
                     setActiveSection(section.id);

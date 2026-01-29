@@ -27,7 +27,8 @@ const ProjectSchema = new Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
     link: { type: String, default: '#' },
-    type: { type: String, required: true } // 'Web App', 'Mobile App', etc.
+    type: { type: String, required: true }, // 'Web App', 'Mobile App', etc.
+    imageUrl: { type: String, required: false }
 });
 
 const EducationSchema = new Schema({
@@ -49,7 +50,8 @@ const PortfolioDataSchema = new Schema({
     techStack: [{ type: String }],
     projects: [ProjectSchema],
     education: [EducationSchema],
-    experience: [ExperienceSchema]
+    experience: [ExperienceSchema],
+    policies: [Object] // Array of objects, e.g. [{ "lipi": "html content" }]
 }, { timestamps: true });
 
 // Use a singleton model based on a fixed ID or just fetch the first one

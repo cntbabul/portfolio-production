@@ -1,8 +1,10 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Phone, MessageCircle } from "lucide-react";
+import { FaWhatsapp, FaPhone, FaReact, FaNodeJs, FaHtml5, FaCss3, FaJs, FaShieldAlt } from "react-icons/fa";
+import { SiNextdotjs, SiMongodb, SiPrisma, SiTailwindcss, SiTypescript } from "react-icons/si";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import useEmblaCarousel from "embla-carousel-react";
 
 interface HeroProps {
     personalInfo: {
@@ -15,6 +17,25 @@ interface HeroProps {
 }
 
 export function Hero({ personalInfo, techStack }: HeroProps) {
+    const [emblaRef] = useEmblaCarousel({ loop: false, align: "start", dragFree: true });
+
+    const getTechIcon = (tech: string) => {
+        const lower = tech.toLowerCase();
+        if (lower.includes("react native")) return <FaReact className="text-blue-400" />;
+        if (lower.includes("react")) return <FaReact className="text-blue-500" />;
+        if (lower.includes("next")) return <SiNextdotjs className="" />;
+        if (lower.includes("node")) return <FaNodeJs className="text-green-500" />;
+        if (lower.includes("mongo")) return <SiMongodb className="text-green-600" />;
+        if (lower.includes("prisma")) return <SiPrisma className="text-teal-500" />;
+        if (lower.includes("auth")) return <FaShieldAlt className="text-yellow-500" />;
+        if (lower.includes("html")) return <FaHtml5 className="text-orange-500" />;
+        if (lower.includes("css")) return <FaCss3 className="text-blue-600" />;
+        if (lower.includes("js")) return <FaJs className="text-yellow-400" />;
+        if (lower.includes("tailwind")) return <SiTailwindcss className="text-cyan-400" />;
+        if (lower.includes("typescript")) return <SiTypescript className="text-blue-600" />;
+        return null;
+    };
+
     const handleContactClick = (contact: { type: string, value: string }) => {
         if (contact.type === "whatsapp") {
             const formatted = contact.value.replace(/[^0-9]/g, "");
@@ -34,7 +55,7 @@ export function Hero({ personalInfo, techStack }: HeroProps) {
                         transition={{ duration: 0.5 }}
                         className="text-3xl md:text-4xl font-hand"
                     >
-                        hello, i am
+                        Hello, I'm
                     </motion.h2>
                     <motion.h1
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -64,8 +85,8 @@ export function Hero({ personalInfo, techStack }: HeroProps) {
                                 onClick={() => handleContactClick(contact)}
                                 className="chalk-border px-6 py-3 flex items-center gap-2 bg-black/20 backdrop-blur-sm hover:scale-105 transition-transform cursor-pointer"
                             >
-                                {contact.type === "call" ? <Phone size={20} /> : <MessageCircle size={20} />}
-                                <span className="text-xl font-hand font-bold">{contact.label}</span>
+                                {contact.type === "call" ? <FaPhone className="scale-x-[-1]" color="#1877F2" size={20} /> : <FaWhatsapp size={20} color="#25D366" />}
+                                <span className="text-xl font-hand font-bold">{contact.label || contact.value}</span>
                             </motion.div>
                         ))}
                     </div>
@@ -76,12 +97,12 @@ export function Hero({ personalInfo, techStack }: HeroProps) {
                     initial={{ opacity: 0, rotate: 5 }}
                     animate={{ opacity: 1, rotate: 0 }}
                     transition={{ delay: 0.5, type: 'spring' }}
-                    className="w-full md:w-80 h-64 md:h-96 chalk-border flex items-center justify-center bg-black/20 overflow-hidden relative shadow-lg"
+                    className="w-80 h-80 md:w-96 md:h-96 mx-auto md:mx-0 chalk-border-straight flex items-center justify-center bg-black/20 overflow-hidden relative shadow-lg"
                 >
                     <Image
                         src={personalInfo.profileImageUrl || "/profile.png"}
                         alt="Profile"
-                        width={320}
+                        width={384}
                         height={384}
                         className="w-full h-full object-cover object-top"
                     />
@@ -97,27 +118,20 @@ export function Hero({ personalInfo, techStack }: HeroProps) {
                 whileInView={{ opacity: 1, width: "100%" }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="w-full chalk-border p-1 flex mt-8 md:mt-0 overflow-hidden bg-(--text-secondary)/10"
+                className="w-full chalk-border-straight p-1 flex mt-8 md:mt-0 overflow-hidden bg-(--text-secondary)/10"
             >
-                <div className="flex w-full overflow-hidden relative">
-                    <motion.div
-                        className="flex min-w-full"
-                        animate={{ x: ["0%", "-50%"] }}
-                        transition={{
-                            repeat: Infinity,
-                            ease: "linear",
-                            duration: 20,
-                        }}
-                    >
-                        {[...techStack, ...techStack].map((tech, idx) => (
+                <div className="overflow-hidden w-full cursor-grab active:cursor-grabbing" ref={emblaRef}>
+                    <div className="flex">
+                        {techStack.map((tech, idx) => (
                             <div
                                 key={`${tech}-${idx}`}
-                                className="shrink-0 px-8 py-4 text-2xl md:text-3xl font-hand font-bold hover:bg-(--text-primary)/10 transition-colors whitespace-nowrap border-r-2 border-(--text-primary)/80"
+                                className="shrink-0 px-8 py-4 text-2xl md:text-3xl font-hand font-bold hover:bg-(--text-primary)/10 transition-colors whitespace-nowrap border-r-2 border-(--text-primary)/80 select-none flex items-center gap-3"
                             >
-                                {tech}
+                                {getTechIcon(tech)}
+                                <span>{tech}</span>
                             </div>
                         ))}
-                    </motion.div>
+                    </div>
                 </div>
             </motion.div>
         </section>

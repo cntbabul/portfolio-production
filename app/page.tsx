@@ -3,6 +3,7 @@ import { Experience } from "@/components/Experience";
 import { Hero } from "@/components/Hero";
 import { Projects } from "@/components/Projects";
 import { getPortfolioData } from "@/lib/actions";
+import Link from "next/link";
 
 export default async function Home() {
   const data = await getPortfolioData();
@@ -40,9 +41,15 @@ export default async function Home() {
         <Education education={education} />
       </div>
 
-      <footer className="w-full text-center py-8 font-hand text-white/40">
+      <footer className="w-full text-center py-8 font-hand text-white/40 flex flex-col items-center gap-2">
         <p>© {new Date().getFullYear()} {personalInfo.name}. All rights reserved.</p>
-        <p className="text-sm">Designed with chalk & code.</p>
+        <div className="flex gap-4 text-sm">
+          <p>Designed with chalk & code.</p>
+          <span>|</span>
+          <Link href="/policies" className="hover:text-white transition-colors underline-offset-4 hover:underline">
+            Privacy Policy
+          </Link>
+        </div>
       </footer>
     </div>
   );

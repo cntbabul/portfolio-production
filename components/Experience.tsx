@@ -14,7 +14,7 @@ export function Experience({ experience }: { experience: ExperienceItem[] }) {
     const containerRef = useRef<HTMLDivElement>(null);
 
     return (
-        <section className="w-full overflow-hidden py-12">
+        <section className="w-full max-w-5xl mx-auto p-4 md:p-8 py-12">
             <motion.h2
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -37,8 +37,8 @@ export function Experience({ experience }: { experience: ExperienceItem[] }) {
                             className="w-[90vw] md:w-[45vw] lg:w-[32vw] min-w-75 shrink-0"
                         >
                             <div className="chalk-border-straight p-8 bg-black/40 flex flex-col gap-4 relative isolate h-full min-h-75 hover:bg-black/50 transition-colors">
-                                <div className="absolute -top-6 -left-4 bg-[#2b2b2b] px-4 py-2 chalk-border -rotate-2 z-20">
-                                    <span className="text-xl font-hand font-bold text-(--text-primary)">{exp.period}</span>
+                                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#2b2b2b] px-6 py-2 chalk-border-straight z-20 shadow-lg">
+                                    <span className="text-xl font-hand font-bold text-(--text-primary) whitespace-nowrap">{exp.period}</span>
                                 </div>
 
                                 <div className="mt-2">

@@ -13,7 +13,7 @@ export function Education({ education }: { education: EducationItem[] }) {
     const containerRef = useRef<HTMLDivElement>(null);
 
     return (
-        <section className="w-full overflow-hidden py-12 pb-24">
+        <section className="w-full max-w-5xl mx-auto p-4 md:p-8 py-12 pb-24">
             <motion.h2
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -37,12 +37,12 @@ export function Education({ education }: { education: EducationItem[] }) {
                         >
                             <div className="flex flex-col items-center w-full group">
                                 {/* Degree Pill */}
-                                <div className="chalk-border px-6 py-3 bg-black/40 -mb-4 z-10 relative w-[90%] text-center transition-transform duration-300 group-hover:-translate-y-2">
-                                    <span className="text-xl md:text-2xl font-hand font-bold whitespace-nowrap overflow-hidden text-ellipsis">{edu.degree}</span>
+                                <div className="chalk-border-straight px-6 py-1 bg-black/40 -mb-[3px] z-10 relative w-[90%] text-center transition-transform duration-300">
+                                    <span className="text-xl md:text-2xl font-chalk font-bold whitespace-nowrap overflow-hidden text-ellipsis">{edu.degree}</span>
                                 </div>
 
                                 {/* Content Box */}
-                                <div className="w-full h-full min-h-36 chalk-border bg-black/30 flex flex-col items-center justify-center p-6 hover:bg-black/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+                                <div className="w-full h-full min-h-36 chalk-border-straight bg-black/30 flex flex-col items-center justify-center p-6 hover:bg-black/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
                                     <p className="text-lg md:text-2xl font-chalk text-center opacity-90 leading-tight mb-2 text-(--text-primary)">
                                         {edu.institute}
                                     </p>

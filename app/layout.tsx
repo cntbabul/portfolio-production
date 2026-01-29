@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Caveat } from "next/font/google";
+import { Patrick_Hand } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import "./globals.css";
 
-const hand = Caveat({
+const hand = Patrick_Hand({
   subsets: ["latin"],
+  weight: "400",
   variable: "--font-hand",
 });
 
 export const metadata: Metadata = {
-  title: "Md Babul Miah-Portfolio",
+  title: "Babul-Portfolio",
   description: "Fullstack Web & Mobile Developer",
 };
 

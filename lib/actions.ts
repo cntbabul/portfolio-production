@@ -13,16 +13,26 @@ export async function getPortfolioData() {
         const seedData = {
             personalInfo: {
                 ...portfolioData.personalInfo,
-                backgroundUrl: '/blackboard-bg.jpg',
-                profileImageUrl: '/profile.png'
+                backgroundUrl: "https://images.pexels.com/photos/5685084/pexels-photo-5685084.jpeg",
+                profileImageUrl: "https://images.pexels.com/photos/35881900/pexels-photo-35881900.jpeg",
             },
             techStack: portfolioData.techStack,
             projects: portfolioData.projects,
             education: portfolioData.education,
-            experience: portfolioData.experience
+            experience: portfolioData.experience,
+            policies: portfolioData.policies
         };
 
         data = await Portfolio.create(seedData);
+    } else {
+        // FORCE SEED: Update everything from local data
+        data.personalInfo = portfolioData.personalInfo;
+        data.techStack = portfolioData.techStack;
+        data.projects = portfolioData.projects;
+        data.education = portfolioData.education;
+        data.experience = portfolioData.experience;
+        data.policies = portfolioData.policies;
+        await data.save();
     }
 
     // Return plain object needed for Client Components
